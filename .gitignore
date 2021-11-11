@@ -1,1 +1,6 @@
-/test_sorting_algorithms
+# Ignore all
+*
+# Unignore all with extensions
+!*.*
+# Unignore all dirs
+!*/
