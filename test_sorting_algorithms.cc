@@ -35,8 +35,14 @@ void TestTiming() {
 
 // Generates and returns random vector of size @size_of_vector.
 vector<int> GenerateRandomVector(size_t size_of_vector) {
-  // Use rand() to generate random integer
-  // Add code
+  std::vector<int> out(size_of_vector);
+  for (auto curr = out.begin(); curr < out.end(); curr++)
+  {
+    *curr = (rand() % 1000);
+  }
+
+  return out;
+  
 }
 
 // Generates and returns sorted vector of size @size_of_vector.
