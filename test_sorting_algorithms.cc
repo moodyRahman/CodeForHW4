@@ -49,7 +49,28 @@ vector<int> GenerateRandomVector(size_t size_of_vector) {
 // If @smaller_to_larger is true, returns vector sorted from small to large.
 // Otherwise returns vector sorted from large to small
 vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) {
-  // Add code
+  std::vector<int> out(size_of_vector);
+  std::function<bool(int, int)> cmp;
+
+  int dx = smaller_to_larger?0:10000;
+
+  for (size_t x = 0; x < size_of_vector; x++)
+  {
+    out[x] = dx;
+
+    if (smaller_to_larger)
+    {
+      dx += rand() % 100;
+    }
+    else
+    {
+      dx -= rand() % (10000 / size_of_vector);
+    }
+
+  }
+  
+  return out;
+
 }
 
 // Verifies that a vector is sorted given a comparator.
