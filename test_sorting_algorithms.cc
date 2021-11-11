@@ -98,9 +98,24 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
 void testSortingWrapper(int argc, char **argv) {
 
   std::cout << "hello" << std::endl;
-  std::vector<int> m {5, 4, 6, 7};
   std::cout << std::boolalpha << std::endl;
-  std::cout << VerifyOrder(m, std::less<int>()) << std::endl;
+
+
+  std::vector<int> less_vec {5, 4, 6, 7};
+  std::vector<int> greater_vec {7, 6, 5, 4};
+  std::vector<int> no_vec {};
+
+  std::vector<int> rand = GenerateRandomVector(20);
+  std::vector<int> sorted_vec_big_small = GenerateSortedVector(20, false);
+  std::vector<int> sorted_vec_small_big = GenerateSortedVector(20, true);
+  
+
+  std::cout << VerifyOrder(sorted_vec_big_small, std::greater<int>()) << std::endl;
+  std::cout << VerifyOrder(sorted_vec_big_small, std::less<int>()) << std::endl;
+  
+  std::cout << VerifyOrder(sorted_vec_small_big, std::greater<int>()) << std::endl;
+  std::cout << VerifyOrder(sorted_vec_small_big, std::less<int>()) << std::endl;
+
 
 
   const string input_type = string(argv[1]);
