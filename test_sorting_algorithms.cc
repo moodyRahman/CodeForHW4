@@ -57,6 +57,10 @@ vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) 
 // if less_than() is true for all pairs.
 template <typename Comparable, typename Comparator>
 bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
+  if (input.size() == 0)
+  {
+    return true;
+  }
   auto curr = input.begin();
   while (curr != (input.end()-1))
   {
