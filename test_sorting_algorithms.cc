@@ -58,6 +58,7 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
     {
       return false;
     }
+    curr++;
   }
   return true;
 }
@@ -65,9 +66,10 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
 // Wrapper function to test different sorting algorithms. See homework's PDF for details.
 void testSortingWrapper(int argc, char **argv) {
 
-  std::vector<int> m {4, 5, 6, 7};
-
-  std::cout << (VerifyOrder<int, std::less>(m, std::less)?"true":"false") << std::endl;
+  std::cout << "hello" << std::endl;
+  std::vector<int> m {5, 4, 6, 7};
+  std::cout << std::boolalpha << std::endl;
+  std::cout << VerifyOrder(m, std::less<int>()) << std::endl;
 
 
   const string input_type = string(argv[1]);
