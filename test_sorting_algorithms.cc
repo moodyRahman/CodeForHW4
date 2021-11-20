@@ -128,7 +128,12 @@ void testSortingWrapper(int argc, char **argv) {
 
   std::cout << VerifyOrder(vec, std::less<int>()) << std::endl;
   
-  heapsort(vec, std::less<int>());
+  heapsort(vec, std::greater<int>());
+
+  for (auto x: vec)
+  {
+    std::cout << x << std::endl;
+  }
 
   std::cout << VerifyOrder(vec, std::less<int>()) << std::endl;
 
