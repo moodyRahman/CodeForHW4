@@ -87,8 +87,8 @@ inline int leftChild(int i)
  * i is the position from which to percolate down.
  * n is the logical size of the binary heap.
  */
-template <typename Comparable>
-void percDown(vector<Comparable> &a, int i, int n)
+template <typename Comparable, typename Comparator>
+void percDown(vector<Comparable> &a, int i, int n, Comparator less_than)
 {
     int child;
     Comparable tmp;
@@ -96,9 +96,9 @@ void percDown(vector<Comparable> &a, int i, int n)
     for (tmp = std::move(a[i]); leftChild(i) < n; i = child)
     {
         child = leftChild(i);
-        if (child != n - 1 && a[child] < a[child + 1])
+        if (child != n - 1 && (less_than(a[child], a[child + 1]) || (a[child] == a[child + 1]) ))
             ++child;
-        if (tmp < a[child])
+        if (less_than(tmp, a[child]))
             a[i] = std::move(a[child]);
         else
             break;
@@ -115,12 +115,12 @@ void heapsort(vector<Comparable> &a, Comparator less_than)
 {
     for (int i = a.size() / 2 - 1; i >= 0; --i)
     {
-        percDown(a, i, a.size());
+        percDown(a, i, a.size(), less_than);
     }
     for (int j = a.size() - 1; j > 0; --j)
     {
         std::swap(a[0], a[j]); /* deleteMax */
-        percDown(a, 0, j);
+        percDown(a, 0, j, less_than);
     }
 }
 

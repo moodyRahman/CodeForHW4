@@ -101,16 +101,6 @@ void testSortingWrapper(int argc, char **argv) {
   const int input_size = stoi(string(argv[2]));
   const string comparison_type = string(argv[3]);
 
-  std::vector<int> m {0, 0, 0, 0, 1};
-
-  for (auto x: m)
-  {
-    std::cout << x << std::endl;
-  }
-
-  std::cout << VerifyOrder(m, std::less<int>()) << std::endl;
-
-
   if (input_type != "random" && input_type != "sorted_small_to_large" && input_type != "sorted_large_to_small") {
     cout << "Invalid input type" << endl;
     return;
@@ -129,11 +119,18 @@ void testSortingWrapper(int argc, char **argv) {
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
   vector<int> input_vector;
+  std::vector<int> vec;
   if (input_type == "random") {
-    std::vector<int> vec = GenerateRandomVector(input_size);
+    vec = GenerateRandomVector(input_size);
   } else {
-    std::vector<int> vec = GenerateSortedVector(input_size, true);
+    vec = GenerateSortedVector(input_size, true);
   }
+
+  std::cout << VerifyOrder(vec, std::less<int>()) << std::endl;
+  
+  heapsort(vec, std::less<int>());
+
+  std::cout << VerifyOrder(vec, std::less<int>()) << std::endl;
 
 
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.
