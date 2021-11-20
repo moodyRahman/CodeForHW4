@@ -50,8 +50,6 @@ vector<int> GenerateRandomVector(size_t size_of_vector) {
 // Otherwise returns vector sorted from large to small
 vector<int> GenerateSortedVector(size_t size_of_vector, bool smaller_to_larger) {
   std::vector<int> out(size_of_vector);
-  std::function<bool(int, int)> cmp;
-
   int dx = smaller_to_larger?0:10000;
 
   for (size_t x = 0; x < size_of_vector; x++)
@@ -105,16 +103,6 @@ void testSortingWrapper(int argc, char **argv) {
   std::vector<int> greater_vec {7, 6, 5, 4};
   std::vector<int> no_vec {};
 
-  std::vector<int> rand = GenerateRandomVector(20);
-  std::vector<int> sorted_vec_big_small = GenerateSortedVector(20, false);
-  std::vector<int> sorted_vec_small_big = GenerateSortedVector(20, true);
-  
-
-  std::cout << VerifyOrder(sorted_vec_big_small, std::greater<int>()) << std::endl;
-  std::cout << VerifyOrder(sorted_vec_big_small, std::less<int>()) << std::endl;
-  
-  std::cout << VerifyOrder(sorted_vec_small_big, std::greater<int>()) << std::endl;
-  std::cout << VerifyOrder(sorted_vec_small_big, std::less<int>()) << std::endl;
 
 
 
@@ -137,13 +125,12 @@ void testSortingWrapper(int argc, char **argv) {
   }
 
   // This block of code to be removed for your final submission.
-  TestTiming();
+  // TestTiming();
 
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
   vector<int> input_vector;
   if (input_type == "random") {
-    // Generate random vector @input_vector.
-    
+    std::vector<int> rand = GenerateRandomVector(20);
   } else {
     // Generate sorted vector @input_vector.
 
