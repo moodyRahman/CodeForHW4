@@ -83,7 +83,7 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
   auto curr = input.begin();
   while (curr != (input.end()-1))
   {
-    if (*curr == *(curr+1) || !less_than(*curr, *(curr+1)))
+    if (!(less_than(*curr, *(curr+1)) || *curr == *(curr+1)))
     {
       return false;
     }
@@ -100,6 +100,15 @@ void testSortingWrapper(int argc, char **argv) {
   const string input_type = string(argv[1]);
   const int input_size = stoi(string(argv[2]));
   const string comparison_type = string(argv[3]);
+
+  std::vector<int> m {0, 0, 0, 0, 1};
+
+  for (auto x: m)
+  {
+    std::cout << x << std::endl;
+  }
+
+  std::cout << VerifyOrder(m, std::less<int>()) << std::endl;
 
 
   if (input_type != "random" && input_type != "sorted_small_to_large" && input_type != "sorted_large_to_small") {
