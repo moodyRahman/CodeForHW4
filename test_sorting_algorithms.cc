@@ -83,7 +83,7 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
   auto curr = input.begin();
   while (curr != (input.end()-1))
   {
-    if (!less_than(*curr, *(curr+1)))
+    if (*curr == *(curr+1) || !less_than(*curr, *(curr+1)))
     {
       return false;
     }
@@ -95,16 +95,7 @@ bool VerifyOrder(const vector<Comparable> &input, Comparator less_than) {
 // Wrapper function to test different sorting algorithms. See homework's PDF for details.
 void testSortingWrapper(int argc, char **argv) {
 
-  std::cout << "hello" << std::endl;
   std::cout << std::boolalpha << std::endl;
-
-
-  std::vector<int> less_vec {5, 4, 6, 7};
-  std::vector<int> greater_vec {7, 6, 5, 4};
-  std::vector<int> no_vec {};
-
-
-
 
   const string input_type = string(argv[1]);
   const int input_size = stoi(string(argv[2]));
@@ -130,11 +121,11 @@ void testSortingWrapper(int argc, char **argv) {
   cout << "Running sorting algorithms: " << input_type << " " << input_size << " numbers " << comparison_type << endl;
   vector<int> input_vector;
   if (input_type == "random") {
-    std::vector<int> rand = GenerateRandomVector(20);
+    std::vector<int> vec = GenerateRandomVector(input_size);
   } else {
-    // Generate sorted vector @input_vector.
-
+    std::vector<int> vec = GenerateSortedVector(input_size, true);
   }
+
 
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.
   // ...
