@@ -139,10 +139,18 @@ void testSortingWrapper(int argc, char **argv)
     vec = GenerateSortedVector(input_size, false);
   }
 
+  if (comparison_type == "less")
+  {
+    std::cout << "less then comparator" << std::endl;
+    heapsort(vec, std::less<int>());
+  }
+  else
+  {
+    std::cout << "greater than comparator" << std::endl;
+    heapsort(vec, std::greater<int>());
+  }
+
   std::cout << VerifyOrder(vec, std::less<int>()) << std::endl;
-
-  heapsort(vec, std::greater<int>());
-
 
   for (auto x : vec)
   {
