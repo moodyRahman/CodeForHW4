@@ -96,9 +96,9 @@ void percDown(vector<Comparable> &a, int i, int n, Comparator less_than)
     for (tmp = std::move(a[i]); leftChild(i) < n; i = child)
     {
         child = leftChild(i);
-        if (child != n - 1 && (less_than(a[child], a[child + 1]) || (a[child] == a[child + 1]) ))
+        if (child != n - 1 && (!less_than(a[child], a[child + 1]) || (a[child] == a[child + 1]) ))
             ++child;
-        if (less_than(tmp, a[child]))
+        if (!less_than(tmp, a[child]) || tmp == a[child] )
             a[i] = std::move(a[child]);
         else
             break;
