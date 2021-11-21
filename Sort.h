@@ -69,7 +69,6 @@ void shellsort(vector<Comparable> &a)
         }
 }
 
-
 /**
  * Internal method for heapsort.
  * i is the index of an item in the heap.
@@ -79,7 +78,6 @@ inline int leftChild(int i)
 {
     return 2 * i + 1;
 }
-
 
 /**
  * Internal method for heapsort that is used in
@@ -96,16 +94,15 @@ void percDown(vector<Comparable> &a, int i, int n, Comparator less_than)
     for (tmp = std::move(a[i]); leftChild(i) < n; i = child)
     {
         child = leftChild(i);
-        if (child != n - 1 && (!less_than(a[child], a[child + 1]) || (a[child] == a[child + 1]) ))
+        if (child != n - 1 && (less_than(a[child], a[child + 1]) || (a[child] == a[child + 1])))
             ++child;
-        if (!less_than(tmp, a[child]) || tmp == a[child] )
+        if (less_than(tmp, a[child]) || tmp == a[child])
             a[i] = std::move(a[child]);
         else
             break;
     }
     a[i] = std::move(tmp);
 }
-
 
 /**
  * Standard heapsort.
@@ -125,37 +122,6 @@ void heapsort(vector<Comparable> &a, Comparator less_than)
 }
 
 /**
- * Internal method that makes recursive calls.
- * a is an array of Comparable items.
- * tmpArray is an array to place the merged result.
- * left is the left-most index of the subarray.
- * right is the right-most index of the subarray.
- */
-template <typename Comparable>
-void mergeSort(vector<Comparable> &a,
-               vector<Comparable> &tmpArray, int left, int right)
-{
-    if (left < right)
-    {
-        int center = (left + right) / 2;
-        mergeSort(a, tmpArray, left, center);
-        mergeSort(a, tmpArray, center + 1, right);
-        merge(a, tmpArray, left, center + 1, right);
-    }
-}
-
-/**
- * Mergesort algorithm (driver).
- */
-template <typename Comparable>
-void mergeSort(vector<Comparable> &a)
-{
-    vector<Comparable> tmpArray(a.size());
-
-    mergeSort(a, tmpArray, 0, a.size() - 1);
-}
-
-/**
  * Internal method that merges two sorted halves of a subarray.
  * a is an array of Comparable items.
  * tmpArray is an array to place the merged result.
@@ -163,9 +129,9 @@ void mergeSort(vector<Comparable> &a)
  * rightPos is the index of the start of the second half.
  * rightEnd is the right-most index of the subarray.
  */
-template <typename Comparable>
+template <typename Comparable, typename Comparator>
 void merge(vector<Comparable> &a, vector<Comparable> &tmpArray,
-           int leftPos, int rightPos, int rightEnd)
+           int leftPos, int rightPos, int rightEnd, Comparator less_than)
 {
     int leftEnd = rightPos - 1;
     int tmpPos = leftPos;
@@ -173,7 +139,7 @@ void merge(vector<Comparable> &a, vector<Comparable> &tmpArray,
 
     // Main loop
     while (leftPos <= leftEnd && rightPos <= rightEnd)
-        if (a[leftPos] <= a[rightPos])
+        if (less_than(a[leftPos], a[rightPos]))
             tmpArray[tmpPos++] = std::move(a[leftPos++]);
         else
             tmpArray[tmpPos++] = std::move(a[rightPos++]);
@@ -187,6 +153,37 @@ void merge(vector<Comparable> &a, vector<Comparable> &tmpArray,
     // Copy tmpArray back
     for (int i = 0; i < numElements; ++i, --rightEnd)
         a[rightEnd] = std::move(tmpArray[rightEnd]);
+}
+
+/**
+ * Internal method that makes recursive calls.
+ * a is an array of Comparable items.
+ * tmpArray is an array to place the merged result.
+ * left is the left-most index of the subarray.
+ * right is the right-most index of the subarray.
+ */
+template <typename Comparable, typename Comparator>
+void mergeSort(vector<Comparable> &a,
+               vector<Comparable> &tmpArray, int left, int right, Comparator less_than)
+{
+    if (left < right)
+    {
+        int center = (left + right) / 2;
+        mergeSort(a, tmpArray, left, center, less_than);
+        mergeSort(a, tmpArray, center + 1, right, less_than);
+        merge(a, tmpArray, left, center + 1, right, less_than);
+    }
+}
+
+/**
+ * Mergesort algorithm (driver).
+ */
+template <typename Comparable, typename Comparator>
+void mergeSort(vector<Comparable> &a, Comparator less_than)
+{
+    vector<Comparable> tmpArray(a.size());
+
+    mergeSort(a, tmpArray, 0, a.size() - 1, less_than);
 }
 
 /**
