@@ -108,7 +108,7 @@ void percDown(vector<Comparable> &a, int i, int n, Comparator less_than)
  * Standard heapsort.
  */
 template <typename Comparable, typename Comparator>
-void Heapsort(vector<Comparable> &a, Comparator less_than)
+void heapsort(vector<Comparable> &a, Comparator less_than)
 {
     for (int i = a.size() / 2 - 1; i >= 0; --i)
     {
@@ -179,7 +179,7 @@ void mergeSort(vector<Comparable> &a,
  * Mergesort algorithm (driver).
  */
 template <typename Comparable, typename Comparator>
-void MergeSort(vector<Comparable> &a, Comparator less_than)
+void mergeSort(vector<Comparable> &a, Comparator less_than)
 {
     vector<Comparable> tmpArray(a.size());
 
@@ -392,8 +392,7 @@ void insertionSort(const RandomIterator &begin,
 template <typename Comparable, typename Comparator>
 void HeapSort(vector<Comparable> &a, Comparator less_than)
 {
-    // Add code. You can use any of functions above (afrer you modified them), or any other helper
-    // function you write.
+    heapsort(a, less_than);
 }
 
 // Driver for MergeSort.
@@ -402,8 +401,7 @@ void HeapSort(vector<Comparable> &a, Comparator less_than)
 template <typename Comparable, typename Comparator>
 void MergeSort(vector<Comparable> &a, Comparator less_than)
 {
-    // Add code. You can use any of functions above (afrer you modified them), or any other helper
-    // function you write.
+    mergeSort(a, less_than);
 }
 
 // Driver for QuickSort (median of 3 partitioning).
