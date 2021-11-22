@@ -142,7 +142,7 @@ void testSortingWrapper(int argc, char **argv)
   if (comparison_type == "less")
   {
     std::cout << "less then comparator" << std::endl;
-    mergeSort(vec, std::less<int>());
+    QuickSort(vec, std::less<int>());
 
     for (auto x : vec)
     {
@@ -155,7 +155,7 @@ void testSortingWrapper(int argc, char **argv)
   else
   {
     std::cout << "greater than comparator" << std::endl;
-    mergeSort(vec, std::greater<int>());
+    QuickSort(vec, std::greater<int>());
 
     for (auto x : vec)
     {
