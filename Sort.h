@@ -108,7 +108,7 @@ void percDown(vector<Comparable> &a, int i, int n, Comparator less_than)
  * Standard heapsort.
  */
 template <typename Comparable, typename Comparator>
-void heapsort(vector<Comparable> &a, Comparator less_than)
+void Heapsort(vector<Comparable> &a, Comparator less_than)
 {
     for (int i = a.size() / 2 - 1; i >= 0; --i)
     {
@@ -179,7 +179,7 @@ void mergeSort(vector<Comparable> &a,
  * Mergesort algorithm (driver).
  */
 template <typename Comparable, typename Comparator>
-void mergeSort(vector<Comparable> &a, Comparator less_than)
+void MergeSort(vector<Comparable> &a, Comparator less_than)
 {
     vector<Comparable> tmpArray(a.size());
 
