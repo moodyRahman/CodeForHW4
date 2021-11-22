@@ -142,24 +142,30 @@ void testSortingWrapper(int argc, char **argv)
   if (comparison_type == "less")
   {
     std::cout << "less then comparator" << std::endl;
-    heapsort(vec, std::less<int>());
+    mergeSort(vec, std::less<int>());
+
+    for (auto x : vec)
+    {
+      std::cout << x << std::endl;
+    }
     std::cout << VerifyOrder(vec, std::less<int>()) << std::endl;
   }
+
+  
   else
   {
     std::cout << "greater than comparator" << std::endl;
-    heapsort(vec, std::greater<int>());
+    mergeSort(vec, std::greater<int>());
+
+    for (auto x : vec)
+    {
+      std::cout << x << std::endl;
+    }
     std::cout << VerifyOrder(vec, std::greater<int>()) << std::endl;
   }
 
-
-  for (auto x : vec)
-  {
-    std::cout << x << std::endl;
-  }
-
   std::cout << "quack" << std::endl;
-  
+
   // Call HeapSort / MergeSort / QuickSort  using appropriate input.
   // ...
   // if comparison type is "less" then call
