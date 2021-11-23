@@ -413,13 +413,14 @@ void QuickSort(vector<Comparable> &a, Comparator less_than)
     quicksort(a, less_than);
 }
 
-
 template <typename Comparable, typename Comparator>
 void quicksort2(vector<Comparable> &a, int left, int right, Comparator less_than)
 {
     if (left + 10 <= right)
     {
-        const Comparable &pivot = a[(left+right) / 2];
+        int center = (left + right) / 2;
+        std::swap(a[center], a[right - 1]);
+        const Comparable &pivot = a[right - 1];
 
         // Begin partitioning
         int i = left, j = right - 1;
@@ -446,25 +447,22 @@ void quicksort2(vector<Comparable> &a, int left, int right, Comparator less_than
         insertionSort(a, left, right, less_than);
 }
 
-
-
 // Driver for QuickSort (middle pivot).
 // @a: input/output vector to be sorted.
 // @less_than: Comparator to be used.
 template <typename Comparable, typename Comparator>
 void QuickSort2(vector<Comparable> &a, Comparator less_than)
 {
-    quicksort2(a, 0, a.size() -1,  less_than);
+    quicksort2(a, 0, a.size() - 1, less_than);
 }
-
-
 
 template <typename Comparable, typename Comparator>
 void quicksort3(vector<Comparable> &a, int left, int right, Comparator less_than)
 {
     if (left + 10 <= right)
     {
-        const Comparable &pivot = a[left];
+        std::swap(a[left + 1], a[right - 1]);
+        const Comparable &pivot = a[right - 1];
 
         // Begin partitioning
         int i = left, j = right - 1;
@@ -491,13 +489,11 @@ void quicksort3(vector<Comparable> &a, int left, int right, Comparator less_than
         insertionSort(a, left, right, less_than);
 }
 
-
-
 // Driver for quicksort using middle as pivot
 template <typename Comparable, typename Comparator>
 void QuickSort3(vector<Comparable> &a, Comparator less_than)
 {
-    quicksort3(a, less_than);
+    quicksort3(a, 0, a.size() - 1, less_than);
 }
 
 #endif // SORT_H
