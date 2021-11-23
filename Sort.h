@@ -37,15 +37,15 @@ void insertionSort(vector<Comparable> &a)
  * left is the left-most index of the subarray.
  * right is the right-most index of the subarray.
  */
-template <typename Comparable>
-void insertionSort(vector<Comparable> &a, int left, int right)
+template <typename Comparable, typename Comparator>
+void insertionSort(vector<Comparable> &a, int left, int right, Comparator less_than)
 {
     for (int p = left + 1; p <= right; ++p)
     {
         Comparable tmp = std::move(a[p]);
         int j;
 
-        for (j = p; j > left && tmp < a[j - 1]; --j)
+        for (j = p; j > left && less_than(tmp, a[j - 1]); --j)
             a[j] = std::move(a[j - 1]);
         a[j] = std::move(tmp);
     }
@@ -195,11 +195,11 @@ const Comparable &median3(vector<Comparable> &a, int left, int right, Comparator
 {
     int center = (left + right) / 2;
 
-    if (a[center] < a[left])
+    if (less_than(a[center], a[left]))
         std::swap(a[left], a[center]);
-    if (a[right] < a[left])
+    if (less_than(a[right], a[left]))
         std::swap(a[left], a[right]);
-    if (a[right] < a[center])
+    if (less_than(a[right], a[center]))
         std::swap(a[center], a[right]);
 
     // Place pivot at position right - 1
@@ -225,10 +225,10 @@ void quicksort(vector<Comparable> &a, int left, int right, Comparator less_than)
         int i = left, j = right - 1;
         for (;;)
         {
-            while (a[++i] < pivot)
+            while (less_than(a[++i], pivot))
             {
             }
-            while (pivot < a[--j])
+            while (less_than(pivot, a[--j]))
             {
             }
             if (i < j)
@@ -243,7 +243,7 @@ void quicksort(vector<Comparable> &a, int left, int right, Comparator less_than)
         quicksort(a, i + 1, right, less_than); // Sort large elements
     }
     else // Do an insertion sort on the subarray
-        insertionSort(a, left, right);
+        insertionSort(a, left, right, less_than);
 }
 
 /**
@@ -419,16 +419,14 @@ void QuickSort(vector<Comparable> &a, Comparator less_than)
 template <typename Comparable, typename Comparator>
 void QuickSort2(vector<Comparable> &a, Comparator less_than)
 {
-    // quicksort implementation
-    // to be filled
+    quicksort(a, less_than);
 }
 
 // Driver for quicksort using middle as pivot
 template <typename Comparable, typename Comparator>
 void QuickSort3(vector<Comparable> &a, Comparator less_than)
 {
-    // quicksort implementation
-    // to be filled
+    quicksort(a, less_than);
 }
 
 #endif // SORT_H
