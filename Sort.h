@@ -418,8 +418,15 @@ void quicksort2(vector<Comparable> &a, int left, int right, Comparator less_than
 {
     if (left + 10 <= right)
     {
-        int center = (left + right) / 2;
-        std::swap(a[center], a[right - 1]);
+        int middle = (left + right) / 2;
+        if (less_than(a[middle], a[left]))
+            std::swap(a[left], a[middle]);
+        if (less_than(a[right], a[left]))
+            std::swap(a[left], a[right]);
+        if (less_than(a[right], a[middle]))
+            std::swap(a[middle], a[right]);
+        std::swap(a[middle], a[right - 1]);
+
         const Comparable &pivot = a[right - 1];
 
         // Begin partitioning
@@ -461,10 +468,12 @@ void quicksort3(vector<Comparable> &a, int left, int right, Comparator less_than
 {
     if (left + 10 <= right)
     {
-        std::swap(a[left + 1], a[right - 1]);
+        if (less_than(a[right], a[left]))
+            std::swap(a[left], a[right]);
+        std::swap(a[left], a[right - 1]);
+
         const Comparable &pivot = a[right - 1];
 
-        // Begin partitioning
         int i = left, j = right - 1;
         for (;;)
         {
